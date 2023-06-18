@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.Map;
 
 public class MemoryCalculatorRepository implements CalculatorRepository {
-    private static final Map<Long, CalculationResult> store = new HashMap<>();
-    private static long sequence = 0L;
+    private final Map<Long, CalculationResult> store = new HashMap<>();
+    private long sequence = 0L;
 
     public void save(CalculationResult calculationResult) {
         store.put(++sequence, calculationResult);
