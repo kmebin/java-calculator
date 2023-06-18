@@ -1,4 +1,4 @@
-package com.programmers.calculator.io;
+package com.programmers.calculator.view;
 
 public interface Output {
     void displayMenu();

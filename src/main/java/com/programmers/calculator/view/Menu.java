@@ -1,4 +1,4 @@
-package com.programmers.calculator.domain;
+package com.programmers.calculator.view;
 
 import com.programmers.calculator.constant.ErrorMessage;
 import com.programmers.calculator.exception.InvalidMenuException;

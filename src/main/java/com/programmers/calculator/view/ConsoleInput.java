@@ -1,7 +1,6 @@
-package com.programmers.calculator.io;
+package com.programmers.calculator.view;
 
-import com.programmers.calculator.domain.Expression;
-import com.programmers.calculator.domain.Menu;
+import com.programmers.calculator.dto.ExpressionInputDto;
 
 import java.util.Scanner;
 
@@ -17,7 +16,7 @@ public class ConsoleInput implements Input {
     }
 
     @Override
-    public Expression readExpression() {
-        return new Expression(scanner.nextLine());
+    public ExpressionInputDto readExpression() {
+        return new ExpressionInputDto(scanner.nextLine());
     }
 }
