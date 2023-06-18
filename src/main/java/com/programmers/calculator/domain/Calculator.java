@@ -14,21 +14,21 @@ public class Calculator {
         Arrays.stream(postfixExpression.split(" "))
                 .forEach(token -> {
                     if (Character.isDigit(token.charAt(0))) {
-                        handleDigit(operandStack, token);
+                        pushOperand(operandStack, token);
                     }
                     if (Operator.isOperator(token)) {
-                        handleOperator(operandStack, token);
+                        pushCalculatedOperand(operandStack, token);
                     }
                 });
 
         return operandStack.pop();
     }
 
-    private void handleDigit(Deque<Double> operandStack, String digit) {
+    private void pushOperand(Deque<Double> operandStack, String digit) {
         operandStack.push(Double.parseDouble(digit));
     }
 
-    private void handleOperator(Deque<Double> operandStack, String symbol) {
+    private void pushCalculatedOperand(Deque<Double> operandStack, String symbol) {
         double operand2 = operandStack.pop();
         double operand1 = operandStack.pop();
 
