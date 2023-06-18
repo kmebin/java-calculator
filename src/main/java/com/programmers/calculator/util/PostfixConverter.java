@@ -32,7 +32,7 @@ public class PostfixConverter {
     private static void handleOperator(StringBuilder postfixExpression, Deque<Operator> operatorStack, String symbol) {
         Operator currentOperator = Operator.findBySymbol(symbol);
 
-        while (!operatorStack.isEmpty() && operatorStack.peek().isHigherPriorityThan(currentOperator)) {
+        while (!operatorStack.isEmpty() && operatorStack.peek().isHigherPriorityThanOrEqualTo(currentOperator)) {
             appendToken(postfixExpression, operatorStack.pop().getSymbol());
         }
         operatorStack.push(currentOperator);

@@ -7,10 +7,10 @@ import java.util.Arrays;
 import java.util.function.BiFunction;
 
 public enum Operator {
-    ADD("+", 1, Double::sum),
-    SUBTRACT("-", 1, (n1, n2) -> n1 - n2),
-    MULTIPLY("*", 2, (n1, n2) -> n1 * n2),
-    DIVIDE("/", 2, (n1, n2) -> n1 / n2);
+    ADD("+", 2, Double::sum),
+    SUBTRACT("-", 2, (n1, n2) -> n1 - n2),
+    MULTIPLY("*", 1, (n1, n2) -> n1 * n2),
+    DIVIDE("/", 1, (n1, n2) -> n1 / n2);
 
     private final String symbol;
     private final int priority;
@@ -42,8 +42,8 @@ public enum Operator {
                 .orElseThrow(() -> new InvalidOperatorException(ErrorMessage.INVALID_OPERATOR));
     }
 
-    public boolean isHigherPriorityThan(Operator operator) {
-        return this.priority >= operator.priority;
+    public boolean isHigherPriorityThanOrEqualTo(Operator operator) {
+        return this.priority <= operator.priority;
     }
 
     public double calculate(double operand1, double operand2) {
