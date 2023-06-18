@@ -7,8 +7,8 @@ import java.util.Arrays;
 import java.util.Deque;
 
 public class Calculator {
-    public double calculate(Expression expression) {
-        String postfixExpression = PostfixConverter.convert(expression.getValue());
+    public double calculate(String expression) {
+        String postfixExpression = PostfixConverter.convert(expression);
         Deque<Double> operandStack = new ArrayDeque<>();
 
         Arrays.stream(postfixExpression.split(" "))

@@ -18,7 +18,7 @@ public class CalculatorService {
 
     public CalculationResult calculate(ExpressionInputDto expressionInputDto) {
         Expression expression = new Expression(expressionInputDto.getExpression());
-        double result = calculator.calculate(expression);
+        double result = calculator.calculate(expression.getValue());
 
         CalculationResult calculationResult = new CalculationResult(expression, result);
         calculatorRepository.save(calculationResult);

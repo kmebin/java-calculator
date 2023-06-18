@@ -1,6 +1,7 @@
 package com.programmers.calculator;
 
 import com.programmers.calculator.domain.CalculationResult;
+import com.programmers.calculator.domain.Expression;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -21,7 +22,7 @@ class MemoryCalculatorRepositoryTest {
     @DisplayName("계산 결과 저장에 성공한다.")
     void 계산_결과_저장() {
         // given
-        CalculationResult calculationResult = new CalculationResult("1 + 2", 3);
+        CalculationResult calculationResult = new CalculationResult(new Expression("1 + 2"), 3);
         // when
         repository.save(calculationResult);
         // then
@@ -33,10 +34,10 @@ class MemoryCalculatorRepositoryTest {
     @DisplayName("계산 결과 리스트 조회에 성공한다.")
     void 계산_결과_리스트_조회() {
         // given
-        CalculationResult calculationResult1 = new CalculationResult("1 + 2", 3);
+        CalculationResult calculationResult1 = new CalculationResult(new Expression("1 + 2"), 3);
         repository.save(calculationResult1);
 
-        CalculationResult calculationResult2 = new CalculationResult("2 * 3", 6);
+        CalculationResult calculationResult2 = new CalculationResult(new Expression("2 * 3"), 6);
         repository.save(calculationResult2);
         // when
         List<CalculationResult> result = repository.findAll();
