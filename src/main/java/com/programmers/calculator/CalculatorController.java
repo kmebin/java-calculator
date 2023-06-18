@@ -30,8 +30,7 @@ public class CalculatorController implements Runnable {
 
             switch (menu) {
                 case HISTORY -> {
-                    getHistory()
-                            .forEach(output::displayResult);
+                    getHistory().forEach(output::displayResult);
                 }
                 case CALCULATE -> {
                     CalculationResult result = calculate(input.readExpression());
