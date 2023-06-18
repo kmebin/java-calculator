@@ -1,10 +1,10 @@
 package com.programmers.calculator;
 
 import com.programmers.calculator.domain.CalculationResult;
-import com.programmers.calculator.domain.Expression;
-import com.programmers.calculator.domain.Menu;
-import com.programmers.calculator.io.Input;
-import com.programmers.calculator.io.Output;
+import com.programmers.calculator.dto.ExpressionInputDto;
+import com.programmers.calculator.view.Input;
+import com.programmers.calculator.view.Menu;
+import com.programmers.calculator.view.Output;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -12,12 +12,12 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class CalculatorController implements Runnable {
     private final Input input;
     private final Output output;
-    private final Calculator calculator;
+    private final CalculatorService calculatorService;
 
-    public CalculatorController(Input input, Output output, Calculator calculator) {
+    public CalculatorController(Input input, Output output, CalculatorService calculatorService) {
         this.input = input;
         this.output = output;
-        this.calculator = calculator;
+        this.calculatorService = calculatorService;
     }
 
     @Override
@@ -34,9 +34,8 @@ public class CalculatorController implements Runnable {
                             .forEach(output::displayResult);
                 }
                 case CALCULATE -> {
-                    Expression expression = input.readExpression();
-                    double result = calculate(expression);
-                    output.displayResult(result);
+                    CalculationResult result = calculate(input.readExpression());
+                    output.displayResult(result.getResult());
                 }
                 case EXIT -> running.set(false);
             }
@@ -44,15 +43,10 @@ public class CalculatorController implements Runnable {
     }
 
     private List<CalculationResult> getHistory() {
-        return calculator.findCalculationHistory();
+        return calculatorService.findCalculationHistory();
     }
 
-    private double calculate(Expression expression) {
-        double result = calculator.calculate(expression.toPostfix());
-
-        CalculationResult calculationResult = new CalculationResult(expression.getValue(), result);
-        calculator.saveCalculationResult(calculationResult);
-
-        return result;
+    private CalculationResult calculate(ExpressionInputDto expressionInputDto) {
+        return calculatorService.calculate(expressionInputDto);
     }
 }

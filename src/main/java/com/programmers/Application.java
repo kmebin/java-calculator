@@ -1,22 +1,25 @@
 package com.programmers;
 
-import com.programmers.calculator.Calculator;
 import com.programmers.calculator.CalculatorController;
 import com.programmers.calculator.CalculatorRepository;
+import com.programmers.calculator.CalculatorService;
 import com.programmers.calculator.MemoryCalculatorRepository;
-import com.programmers.calculator.io.ConsoleInput;
-import com.programmers.calculator.io.ConsoleOutput;
-import com.programmers.calculator.io.Input;
-import com.programmers.calculator.io.Output;
+import com.programmers.calculator.domain.Calculator;
+import com.programmers.calculator.view.ConsoleInput;
+import com.programmers.calculator.view.ConsoleOutput;
+import com.programmers.calculator.view.Input;
+import com.programmers.calculator.view.Output;
 
 public class Application {
     public static void main(String[] args) {
         Input input = new ConsoleInput();
         Output output = new ConsoleOutput();
-        CalculatorRepository calculatorRepository = new MemoryCalculatorRepository();
-        Calculator calculator = new Calculator(calculatorRepository);
 
-        CalculatorController calculatorController = new CalculatorController(input, output, calculator);
+        Calculator calculator = new Calculator();
+        CalculatorRepository calculatorRepository = new MemoryCalculatorRepository();
+        CalculatorService calculatorService = new CalculatorService(calculator, calculatorRepository);
+
+        CalculatorController calculatorController = new CalculatorController(input, output, calculatorService);
         calculatorController.run();
     }
 }

@@ -1,21 +1,14 @@
-package com.programmers.calculator;
+package com.programmers.calculator.domain;
 
-import com.programmers.calculator.domain.CalculationResult;
-import com.programmers.calculator.domain.Operator;
+import com.programmers.calculator.util.PostfixConverter;
 
 import java.util.ArrayDeque;
 import java.util.Arrays;
 import java.util.Deque;
-import java.util.List;
 
 public class Calculator {
-    private final CalculatorRepository calculatorRepository;
-
-    public Calculator(CalculatorRepository calculatorRepository) {
-        this.calculatorRepository = calculatorRepository;
-    }
-
-    public double calculate(String postfixExpression) {
+    public double calculate(Expression expression) {
+        String postfixExpression = PostfixConverter.convert(expression.getValue());
         Deque<Double> operandStack = new ArrayDeque<>();
 
         Arrays.stream(postfixExpression.split(" "))
@@ -29,14 +22,6 @@ public class Calculator {
                 });
 
         return operandStack.pop();
-    }
-
-    public void saveCalculationResult(CalculationResult calculationResult) {
-        calculatorRepository.save(calculationResult);
-    }
-
-    public List<CalculationResult> findCalculationHistory() {
-        return calculatorRepository.findAll();
     }
 
     private void handleDigit(Deque<Double> operandStack, String digit) {

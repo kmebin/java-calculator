@@ -4,9 +4,13 @@ public class CalculationResult {
     private String expression;
     private double result;
 
-    public CalculationResult(String expression, double result) {
-        this.expression = expression;
+    public CalculationResult(Expression expression, double result) {
+        this.expression = expression.getValue();
         this.result = result;
+    }
+
+    public double getResult() {
+        return result;
     }
 
     @Override
